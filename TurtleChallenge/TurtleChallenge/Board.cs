@@ -3,28 +3,28 @@ using TurtleChallenge.Settings.GameSettingsFiles;
 
 namespace TurtleChallenge
 {
-    internal class Board
+    internal class Board : IBoard
     {
-        private readonly Turtle _turtle;
-        private readonly GameSettings _settings;
-        private readonly List<Mine> _mines;
-        private readonly Exit _exit;
+        protected readonly Turtle Turtle;
+        protected readonly GameSettings Settings;
+        protected readonly List<Mine> Mines;
+        protected readonly Exit Exit;
 
         public Board(GameSettings boardSettings)
         {
-            _settings = boardSettings;
-            _turtle = new Turtle
+            Settings = boardSettings;
+            Turtle = new Turtle
             {
-                XPos = _settings.StartPoint.x,
-                YPos = _settings.StartPoint.y,
+                XPos = Settings.StartPoint.x,
+                YPos = Settings.StartPoint.y,
             };
-            _mines = _settings.Mines.Select(m=>new Mine { XPos=m.x, YPos=m.y}).ToList();
-            _exit = new Exit { XPos = _settings.Exit.x, YPos = _settings.Exit.y };
+            Mines = Settings.Mines.Select(m=>new Mine { XPos=m.x, YPos=m.y}).ToList();
+            Exit = new Exit { XPos = Settings.Exit.x, YPos = Settings.Exit.y };
         }
 
-        public TurtleStatus MoveTurtle(Action<Turtle> turtleMover)
+        public virtual TurtleStatus MoveTurtle(Action<Turtle> turtleMover)
         {
-            turtleMover.Invoke(_turtle);
+            turtleMover.Invoke(Turtle);
             return EvaluateBoard();
         }
 
@@ -33,12 +33,12 @@ namespace TurtleChallenge
             if (TurtleIsOutOfBounds())
                 return TurtleStatus.INVALID_MOVE;
             
-            if (_exit.HasTurtleFinished(_turtle))
+            if (Exit.HasTurtleFinished(Turtle))
                 return TurtleStatus.SUCCESS;
 
-            foreach(var m in _mines)
+            foreach(var m in Mines)
             {
-                if (m.HasTurtleDied(_turtle))
+                if (m.HasTurtleDied(Turtle))
                     return TurtleStatus.MINE_HIT;
             }
             return TurtleStatus.IN_DANGER;
@@ -46,7 +46,7 @@ namespace TurtleChallenge
 
         private bool TurtleIsOutOfBounds()
         {
-            return _turtle.XPos >= 0 && _turtle.XPos < _settings.Columns && _turtle.YPos >= 0 && _turtle.YPos < _settings.Rows;
+            return Turtle.XPos >= 0 && Turtle.XPos < Settings.Columns && Turtle.YPos >= 0 && Turtle.YPos < Settings.Rows;
         }
     }
 }

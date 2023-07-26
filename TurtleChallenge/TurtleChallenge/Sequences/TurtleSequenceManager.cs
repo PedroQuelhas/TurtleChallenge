@@ -14,7 +14,7 @@ namespace TurtleChallenge.Sequences
             SequenceNum = sequenceNum;
         }
 
-        public override void ExecuteMoves(Board board)
+        public override void ExecuteMoves(IBoard board)
         {
             var status = TurtleStatus.IN_DANGER;
             while (Sequence.HasNext && status == TurtleStatus.IN_DANGER)
@@ -24,7 +24,7 @@ namespace TurtleChallenge.Sequences
             TurtleStatusPrinter.PrintSequenceStatus(SequenceNum, status);
         }
 
-        protected virtual TurtleStatus ExecuteMove(Board board)
+        protected virtual TurtleStatus ExecuteMove(IBoard board)
         {
             return board.MoveTurtle((piece) => Sequence.ApplyNextMovement(piece));
         }

@@ -10,7 +10,7 @@ namespace TurtleChallenge
         private readonly MovesSettings _moves;
         private readonly bool _visualMode;
 
-        public TurtleGameRunner(GameSettings settings,MovesSettings moves,bool visualMode)
+        public TurtleGameRunner(GameSettings settings, MovesSettings moves, bool visualMode)
         {
             _settings = settings;
             _moves = moves;
@@ -22,15 +22,15 @@ namespace TurtleChallenge
             var sequenceNumber = 0;
             foreach (var sequence in _moves.Sequences)
             {
-                var board = new Board(_settings);
-                RunSequence(sequenceNumber,board, sequence);
+                var board = _visualMode ? new VisualBoard(_settings) : new Board(_settings);
+                RunSequence(sequenceNumber, board, sequence);
                 sequenceNumber++;
             }
         }
 
-        private void RunSequence(int number,Board board, TurtleSequence sequence)
+        private static void RunSequence(int number, IBoard board, TurtleSequence sequence)
         {
-            var manager = _visualMode ? new VisualTurtleSequenceManager(number, sequence) : new TurtleSequenceManager(number,sequence);
+            var manager = new TurtleSequenceManager(number, sequence);
             manager.ExecuteMoves(board);
         }
     }

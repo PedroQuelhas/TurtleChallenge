@@ -5,7 +5,7 @@ namespace TurtleChallenge.BoardPieces
     {
         public bool HasTurtleDied(Turtle turtle)
         {
-            return turtle.XPos == XPos && turtle.YPos == YPos;
+            return MatchCurrentPos(turtle.XPos, turtle.YPos);
         }
     }
 }

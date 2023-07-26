@@ -6,6 +6,11 @@
         public int YPos { get; set; }
 
 
+        public bool MatchCurrentPos(int x, int y)
+        {
+            return x == XPos && y == YPos;
+        }
+
         public void MoveToNewPos(int numberOfSquares, Direction direction)
         {
             switch (direction)

@@ -13,7 +13,7 @@ namespace TurtleChallenge.Sequences
             Sequence = sequence;
         }
 
-       public abstract void ExecuteMoves(Board board);
+       public abstract void ExecuteMoves(IBoard board);
 
     }
 }
