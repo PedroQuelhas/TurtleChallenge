@@ -2,6 +2,7 @@
 {
     internal interface IMovesParser
     {
-        MovesSettings Parse();
+        MovesSettings Parse(string content);
+
     }
 }

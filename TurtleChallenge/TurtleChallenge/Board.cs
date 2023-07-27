@@ -15,11 +15,11 @@ namespace TurtleChallenge
             Settings = boardSettings;
             Turtle = new Turtle
             {
-                XPos = Settings.StartPoint.x,
-                YPos = Settings.StartPoint.y,
+                XPos = Settings.StartPoint.X,
+                YPos = Settings.StartPoint.Y,
             };
-            Mines = Settings.Mines.Select(m=>new Mine { XPos=m.x, YPos=m.y}).ToList();
-            Exit = new Exit { XPos = Settings.Exit.x, YPos = Settings.Exit.y };
+            Mines = Settings.Mines.Select(m=>new Mine { XPos=m.X, YPos=m.Y}).ToList();
+            Exit = new Exit {XPos = Settings.Exit.X, YPos = Settings.Exit.Y };
         }
 
         public virtual TurtleStatus MoveTurtle(Action<Turtle> turtleMover)
@@ -46,7 +46,7 @@ namespace TurtleChallenge
 
         private bool TurtleIsOutOfBounds()
         {
-            return Turtle.XPos >= 0 && Turtle.XPos < Settings.Columns && Turtle.YPos >= 0 && Turtle.YPos < Settings.Rows;
+            return Turtle.XPos < 0 && Turtle.XPos >= Settings.Columns && Turtle.YPos < 0 && Turtle.YPos >= Settings.Rows;
         }
     }
 }

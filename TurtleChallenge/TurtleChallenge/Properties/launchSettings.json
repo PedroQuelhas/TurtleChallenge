@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TurtleChallenge": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\pmmqu\\OneDrive\\Documents\\Repos\\exercises\\turtle\\TurtleChallenge\\Examples\\SettingsExample.json C:\\Users\\pmmqu\\OneDrive\\Documents\\Repos\\exercises\\turtle\\TurtleChallenge\\Examples\\MovesExample.json true"
+    }
+  }
+}

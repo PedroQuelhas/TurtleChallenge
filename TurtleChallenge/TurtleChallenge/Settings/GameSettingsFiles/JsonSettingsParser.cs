@@ -4,16 +4,9 @@ namespace TurtleChallenge.Settings.GameSettingsFiles
 {
     internal class JsonSettingsParser : ISettingsParser
     {
-        private readonly string _jsonData;
-
-        public JsonSettingsParser(string jsonData)
+        public GameSettings Parse(string content)
         {
-            _jsonData = jsonData;
-        }
-
-        public GameSettings Parse()
-        {
-            return JsonConvert.DeserializeObject<GameSettings>(_jsonData);
+            return JsonConvert.DeserializeObject<GameSettings>(content);
         }
     }
 }

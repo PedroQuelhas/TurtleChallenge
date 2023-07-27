@@ -1,4 +1,5 @@
 ﻿using TurtleChallenge.BoardPieces;
+using TurtleChallenge.Utils;
 
 namespace TurtleChallenge.Settings.GameSettingsFiles
 {
@@ -6,8 +7,8 @@ namespace TurtleChallenge.Settings.GameSettingsFiles
     {
         public int Rows { get; set; }
         public int Columns { get; set; }
-        public (int x, int y) StartPoint { get; set; }
-        public (int x, int y) Exit { get; set; }
-        public IEnumerable<(int x, int y)> Mines { get; set; }
+        public Point StartPoint { get; set; }
+        public Point Exit { get; set; }
+        public IEnumerable<Point> Mines { get; set; }
     }
 }

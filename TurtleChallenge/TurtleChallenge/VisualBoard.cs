@@ -1,5 +1,4 @@
 ﻿using Spectre.Console;
-using System.Collections.Generic;
 using TurtleChallenge.BoardPieces;
 using TurtleChallenge.Settings.GameSettingsFiles;
 
@@ -22,101 +21,105 @@ namespace TurtleChallenge
 
         private void PrintBoard()
         {
-            var canvas = new Canvas(_cellSize * Settings.Columns, _cellSize * Settings.Rows);
-
-            DrawEmptySquares(canvas);
-            DrawStartingPoint(canvas);
-            DrawMines(canvas);
-            DrawExit(canvas);
-            DrawTurtle(canvas);
+            var canvas = new Canvas(_cellSize * (Settings.Columns + 1), _cellSize * (Settings.Rows + 1));
+            AnsiConsole.Live(canvas).Start(ctx =>{
+                DrawEmptySquares(canvas);
+                DrawStartingPoint(canvas);
+                DrawMines(canvas);
+                DrawExit(canvas);
+                DrawTurtle(canvas);
+                Thread.Sleep(500);
+            });
         }
+
 
         private void DrawTurtle(Canvas canvas)
         {
             var originX = Turtle.XPos * _cellSize + _padding * 2;
             var originY = Turtle.YPos * _cellSize + _padding * 2;
-            var endX = Turtle.XPos * _cellSize + _cellSize - _padding * 2;
-            var endY = Turtle.YPos * _cellSize + _cellSize - _padding * 2;
-            var midX = originX + (originX - endX) / 2;
-            var midY = originY + (originY - endY) / 2;
-
-
-            //body
-            for (var x = originX; x < originX + _cellSize; x++)
-            {
-                canvas.SetPixel(x, originY, Color.Green3);
-                canvas.SetPixel(endX, x, Color.Green3);
-                canvas.SetPixel(x, endY, Color.Green3);
-                canvas.SetPixel(originX, x, Color.Green3);
-                canvas.SetPixel(midX, x, Color.Green3);
-                canvas.SetPixel(x, originY + x, Color.Green3);
-                canvas.SetPixel(endX - 1 - x, endY - x, Color.Green3);
-            }
+            var height = _cellSize - _padding * 4;
 
             for (var x = 0; x < _padding; x++)
             {
                 //legs
                 if (Turtle.Direction == Direction.North || Turtle.Direction == Direction.South)
                 {
-
-                    canvas.SetPixel(originX + _cellSize / 4, originY - x, Color.SandyBrown);
-                    canvas.SetPixel(originX + _cellSize / 2, originY - x, Color.SandyBrown);
-                    canvas.SetPixel(originX + _cellSize / 4, endY - x, Color.SandyBrown);
-                    canvas.SetPixel(originX + _cellSize / 2, endY - x, Color.SandyBrown);
+                    canvas.SetPixel(originX - x, originY + height / 4, Color.SandyBrown);
+                    canvas.SetPixel(originX - x, originY + height - height / 4, Color.SandyBrown);
+                    canvas.SetPixel(originX + x + height, originY + height / 4, Color.SandyBrown);
+                    canvas.SetPixel(originX + x + height, originY + height - height / 4, Color.SandyBrown);
                 }
 
                 else
                 {
-                    canvas.SetPixel(originX - x, originY + _cellSize / 4, Color.SandyBrown);
-                    canvas.SetPixel(originX - x, originY + _cellSize / 2, Color.SandyBrown);
-                    canvas.SetPixel(endX - x, originY + _cellSize / 4, Color.SandyBrown);
-                    canvas.SetPixel(endX - x, originY + _cellSize / 2, Color.SandyBrown);
+                    canvas.SetPixel(originX + height / 4, originY - x, Color.SandyBrown);
+                    canvas.SetPixel(originX + height - height / 4, originY - x, Color.SandyBrown);
+                    canvas.SetPixel(originX + height / 4, originY + height + x, Color.SandyBrown);
+                    canvas.SetPixel(originX + height - height / 4, originY + height + x, Color.SandyBrown);
                 }
                 //head
                 switch (Turtle.Direction)
                 {
                     case Direction.North:
-                        canvas.SetPixel(originX + _cellSize / 2 - 1, originY - x, Color.SandyBrown);
-                        canvas.SetPixel(originX + _cellSize / 2, originY - x, Color.SandyBrown);
-                        canvas.SetPixel(originX + _cellSize / 2 + 1, originY - x, Color.SandyBrown);
+                        canvas.SetPixel(originX + height / 2 - 1, originY - 1 - x, Color.SandyBrown);
+                        canvas.SetPixel(originX + height / 2, originY - 1 - x, Color.SandyBrown);
+                        canvas.SetPixel(originX + height / 2 + 1, originY - 1 - x, Color.SandyBrown);
                         break;
                     case Direction.South:
-                        canvas.SetPixel(originX + _cellSize / 2 - 1, originY + _cellSize - x, Color.SandyBrown);
-                        canvas.SetPixel(originX + _cellSize / 2, originY + _cellSize - x, Color.SandyBrown);
-                        canvas.SetPixel(originX + _cellSize / 2 + 1, originY + _cellSize - x, Color.SandyBrown);
+                        canvas.SetPixel(originX + height / 2 - 1, originY + height + 1 + x, Color.SandyBrown);
+                        canvas.SetPixel(originX + height / 2, originY + height + 1 + x, Color.SandyBrown);
+                        canvas.SetPixel(originX + height / 2 + 1, originY + height + 1 + x, Color.SandyBrown);
                         break;
                     case Direction.West:
+                        canvas.SetPixel(originX - x - 1, originY + height / 2 - 1, Color.SandyBrown);
+                        canvas.SetPixel(originX - x - 1, originY + height / 2, Color.SandyBrown);
+                        canvas.SetPixel(originX - x - 1, originY + height / 2 + 1, Color.SandyBrown);
                         break;
                     case Direction.East:
+                        canvas.SetPixel(originX + height + x + 1, originY + height / 2 - 1, Color.SandyBrown);
+                        canvas.SetPixel(originX + height + x + 1, originY + height / 2, Color.SandyBrown);
+                        canvas.SetPixel(originX + height + x + 1, originY + height / 2 + 1, Color.SandyBrown);
                         break;
                 }
+
+            }
+            for (var x = 0; x < _cellSize - _padding * 4 + 1; x++)
+            {
+                canvas.SetPixel(originX + x, originY, Color.Green3);
+                canvas.SetPixel(originX + height, originY + x, Color.Green3);
+                canvas.SetPixel(originX + x, originY + height / 2, Color.Green3);
+                canvas.SetPixel(originX + x, originY + height, Color.Green3);
+                canvas.SetPixel(originX, originY + x, Color.Green3);
+                canvas.SetPixel(originX + x, originY + x, Color.Green3);
+                canvas.SetPixel(originX + x, originY + height - x, Color.Green3);
             }
         }
 
         private void DrawExit(Canvas canvas)
         {
             var originX = Exit.XPos * _cellSize + _padding * 2;
-            var originY = Exit.YPos * _cellSize + _cellSize + _padding * 2;
+            var originY = Exit.YPos * _cellSize + _padding * 2;
+            var height = _cellSize - _padding * 4;
 
-            for (var x = originX; x < originX + _cellSize; x++)
+            for (var x = 0; x < _cellSize - _padding * 4; x++)
             {
-                canvas.SetPixel(x, originY, Color.Green);
-                canvas.SetPixel(x, originY + _cellSize / 2, Color.Green);
-                canvas.SetPixel(x, originY + _cellSize, Color.Green);
-                canvas.SetPixel(originX, x, Color.Green);
+                canvas.SetPixel(originX + x, originY, Color.Green);
+                canvas.SetPixel(originX + x, originY + height / 2, Color.Green);
+                canvas.SetPixel(originX + x, originY + height, Color.Green);
+                canvas.SetPixel(originX, originY + x, Color.Green);
             }
         }
 
         private void DrawStartingPoint(Canvas canvas)
         {
-            var originX = Settings.StartPoint.x * _cellSize;
-            var originY = Settings.StartPoint.x * _cellSize + _cellSize;
-            for (var x = originX; x < originX + _cellSize; x++)
+            var originX = Settings.StartPoint.X * _cellSize;
+            var originY = Settings.StartPoint.Y * _cellSize;
+            for (var x = 0; x < _cellSize; x++)
             {
-                canvas.SetPixel(x, originY, Color.Green);
-                canvas.SetPixel(originX + _cellSize, x, Color.Green);
-                canvas.SetPixel(x, originY + _cellSize, Color.Green);
-                canvas.SetPixel(originX, x, Color.Green);
+                canvas.SetPixel(originX + x, originY, Color.Green);
+                canvas.SetPixel(originX + _cellSize, originY + x, Color.Green);
+                canvas.SetPixel(originX + _cellSize - x, originY + _cellSize, Color.Green);
+                canvas.SetPixel(originX, originY + _cellSize - x, Color.Green);
             }
         }
 
@@ -124,14 +127,14 @@ namespace TurtleChallenge
         {
             foreach (var mine in Mines)
             {
-                DrawMine(canvas, mine.XPos * _cellSize, mine.YPos * _cellSize);
+                DrawMine(canvas, mine.XPos, mine.YPos);
             }
         }
 
         private void DrawEmptySquares(Canvas canvas)
         {
             for (var x = 0; x < Settings.Columns * _cellSize; x += _cellSize)
-                for (var y = 0; y < Settings.Columns * _cellSize; y += _cellSize)
+                for (var y = 0; y < Settings.Rows * _cellSize; y += _cellSize)
                 {
                     DrawSquare(canvas, x, y);
                 }
@@ -139,22 +142,26 @@ namespace TurtleChallenge
 
         private void DrawSquare(Canvas canvas, int originX, int originY)
         {
-            for (var x = originX; x < originX + _cellSize; x++)
+            for (var x = 0; x < _cellSize; x++)
             {
-                canvas.SetPixel(x, originY, Color.White);
-                canvas.SetPixel(originX + _cellSize, x, Color.White);
-                canvas.SetPixel(x, originY + _cellSize, Color.White);
-                canvas.SetPixel(originX, x, Color.White);
+                canvas.SetPixel(originX + x, originY, Color.White);
+                canvas.SetPixel(originX + _cellSize, originY + x, Color.White);
+                canvas.SetPixel(originX + _cellSize - x, originY + _cellSize, Color.White);
+                canvas.SetPixel(originX, originY + _cellSize - x, Color.White);
+
             }
         }
 
 
-        private void DrawMine(Canvas canvas, int originX, int originY)
+        private void DrawMine(Canvas canvas, int xPos, int yPos)
         {
-            for (var x = originX + _padding; x < originX + _cellSize - _padding; x++)
+            var originX = xPos * _cellSize + _padding;
+            var originY = yPos * _cellSize + _padding;
+
+            for (var x = 0; x < _cellSize - 2 * _padding + 1; x++)
             {
-                canvas.SetPixel(x, originY - x, Color.Red);
-                canvas.SetPixel(originX + _cellSize - _padding - 1 - x, originY - _padding - 1 - x, Color.Red);
+                canvas.SetPixel(originX + x, originY + x, Color.Red);
+                canvas.SetPixel(originX + x, originY + _cellSize - 2 * _padding - x, Color.Red);
             }
         }
     }

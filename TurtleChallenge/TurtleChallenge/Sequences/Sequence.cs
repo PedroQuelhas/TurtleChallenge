@@ -12,6 +12,7 @@ namespace TurtleChallenge.Sequences
         {
             _movements = movements;
             _currentPos = _movements.GetEnumerator();
+            HasNext = true;
         }
 
 

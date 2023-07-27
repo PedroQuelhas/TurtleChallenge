@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TurtleChallenge.Settings.GameSettingsFiles
+namespace TurtleChallenge.Utils
 {
-    internal interface ISettingsParser
+    internal class Point
     {
-        GameSettings Parse(string content);
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }
