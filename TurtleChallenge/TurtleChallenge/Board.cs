@@ -46,7 +46,7 @@ namespace TurtleChallenge
 
         private bool TurtleIsOutOfBounds()
         {
-            return Turtle.XPos < 0 && Turtle.XPos >= Settings.Columns && Turtle.YPos < 0 && Turtle.YPos >= Settings.Rows;
+            return Turtle.XPos < 0 || Turtle.XPos >= Settings.Columns || Turtle.YPos < 0 || Turtle.YPos >= Settings.Rows;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace TurtleChallenge.Utils
     {
         public static void PrintSequenceStatus(int sequenceNum, TurtleStatus status)
         {
-            Console.WriteLine($"Sequence {sequenceNum}: " + GetStatusString(status));
+            Console.WriteLine($"Sequence {sequenceNum+1}: " + GetStatusString(status));
         }
 
         private static string GetStatusString(TurtleStatus status)

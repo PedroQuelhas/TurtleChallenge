@@ -10,19 +10,22 @@ namespace TurtleChallenge
         private int _padding = 2;
         public VisualBoard(GameSettings boardSettings) : base(boardSettings)
         {
+            PrintBoard();
         }
 
         public override TurtleStatus MoveTurtle(Action<Turtle> turtleMover)
         {
             var status = base.MoveTurtle(turtleMover);
-            PrintBoard();
+            if (status != TurtleStatus.INVALID_MOVE)
+                PrintBoard();
             return status;
         }
 
         private void PrintBoard()
         {
             var canvas = new Canvas(_cellSize * (Settings.Columns + 1), _cellSize * (Settings.Rows + 1));
-            AnsiConsole.Live(canvas).Start(ctx =>{
+            AnsiConsole.Live(canvas).Start(ctx =>
+            {
                 DrawEmptySquares(canvas);
                 DrawStartingPoint(canvas);
                 DrawMines(canvas);
