@@ -2,7 +2,7 @@
 
 namespace TurtleChallenge.Settings.MovesFiles
 {
-    internal class JsonMovesParser : IMovesParser
+    public class JsonMovesParser : IMovesParser
     {
         public MovesSettings Parse(string content)
         {

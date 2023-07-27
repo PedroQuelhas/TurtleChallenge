@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TurtleChallenge.GameRunner;
 using TurtleChallenge.Settings.GameSettingsFiles;
 using TurtleChallenge.Settings.MovesFiles;
 
 namespace TurtleChallenge
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {

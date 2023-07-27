@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurtleChallenge.Settings.GameSettingsFiles
 {
-    internal interface ISettingsParser
+    public interface ISettingsParser
     {
         GameSettings Parse(string content);
     }

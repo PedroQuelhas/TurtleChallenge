@@ -1,8 +1,8 @@
 ﻿using TurtleChallenge.BoardPieces;
 
-namespace TurtleChallenge
+namespace TurtleChallenge.Boards
 {
-    internal interface IBoard
+    public interface IBoard
     {
         TurtleStatus MoveTurtle(Action<Turtle> turtleMover);
     }

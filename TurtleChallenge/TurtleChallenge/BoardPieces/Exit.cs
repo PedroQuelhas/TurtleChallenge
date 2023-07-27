@@ -1,7 +1,7 @@
 ﻿
 namespace TurtleChallenge.BoardPieces
 {
-    internal class Exit : BoardPiece
+    public class Exit : BoardPiece
     {
         public bool HasTurtleFinished(Turtle turtle)
         {

@@ -3,14 +3,14 @@ using TurtleChallenge.Movements;
 
 namespace TurtleChallenge.Sequences
 {
-    internal class TurtleSequence : Sequence<ITurtleMovement, Turtle>
+    public class TurtleSequence : Sequence<ITurtleMovement, Turtle>
     {
         public TurtleSequence(IEnumerable<string> moves) : base(ConvertToTurtleMovement(moves))
         {
         }
 
 
-        private static IEnumerable<ITurtleMovement> ConvertToTurtleMovement(IEnumerable<string> moves)
+        public static IEnumerable<ITurtleMovement> ConvertToTurtleMovement(IEnumerable<string> moves)
         {
             foreach (var move in moves)
             {
@@ -23,6 +23,9 @@ namespace TurtleChallenge.Sequences
                     case "M":
                         yield return new MoveOneSquare();
                         break;
+
+                    default:
+                        throw new InvalidOperationException("Invalid movement provided!");
                 }
             }
         }

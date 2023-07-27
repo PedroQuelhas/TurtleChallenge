@@ -2,7 +2,7 @@
 
 namespace TurtleChallenge.Utils
 {
-    internal static class TurtleStatusPrinter
+    public static class TurtleStatusPrinter
     {
         public static void PrintSequenceStatus(int sequenceNum, TurtleStatus status)
         {

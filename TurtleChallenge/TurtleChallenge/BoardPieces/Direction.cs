@@ -1,6 +1,6 @@
 ﻿namespace TurtleChallenge.BoardPieces
 {
-    internal enum Direction
+    public enum Direction
     {
         North,
         South,

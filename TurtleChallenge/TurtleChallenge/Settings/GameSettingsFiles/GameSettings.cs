@@ -3,7 +3,7 @@ using TurtleChallenge.Utils;
 
 namespace TurtleChallenge.Settings.GameSettingsFiles
 {
-    internal class GameSettings
+    public class GameSettings
     {
         public int Rows { get; set; }
         public int Columns { get; set; }

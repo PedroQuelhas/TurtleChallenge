@@ -2,7 +2,7 @@
 
 namespace TurtleChallenge.Movements
 {
-    internal class MoveOneSquare : ITurtleMovement
+    public class MoveOneSquare : ITurtleMovement
     {
         public void Move(Turtle turtle)
         {

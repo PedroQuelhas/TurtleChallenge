@@ -1,6 +1,6 @@
 ﻿namespace TurtleChallenge.Settings.MovesFiles
 {
-    internal interface IMovesParser
+    public interface IMovesParser
     {
         MovesSettings Parse(string content);
 

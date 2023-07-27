@@ -2,7 +2,7 @@
 
 namespace TurtleChallenge.Movements
 {
-    internal interface ITurtleMovement : IMovement<Turtle>
+    public interface ITurtleMovement : IMovement<Turtle>
     {
     }
 }

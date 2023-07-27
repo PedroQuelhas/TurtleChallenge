@@ -3,7 +3,7 @@
 namespace TurtleChallenge.Sequences
 {
 
-    internal abstract class Sequence<T, TU> where T : IMovement<TU> where TU : class
+    public abstract class Sequence<T, TU> where T : IMovement<TU> where TU : class
     {
         private readonly IEnumerable<T> _movements;
         private readonly IEnumerator<T> _currentPos;

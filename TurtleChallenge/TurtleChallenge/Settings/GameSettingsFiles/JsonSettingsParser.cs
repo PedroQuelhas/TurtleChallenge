@@ -2,7 +2,7 @@
 
 namespace TurtleChallenge.Settings.GameSettingsFiles
 {
-    internal class JsonSettingsParser : ISettingsParser
+    public class JsonSettingsParser : ISettingsParser
     {
         public GameSettings Parse(string content)
         {

@@ -1,6 +1,6 @@
 ﻿namespace TurtleChallenge.BoardPieces
 {
-    internal abstract class BoardPiece
+    public abstract class BoardPiece
     {
         public int XPos { get; set; }
         public int YPos { get; set; }

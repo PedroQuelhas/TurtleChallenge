@@ -2,9 +2,9 @@
 using TurtleChallenge.BoardPieces;
 using TurtleChallenge.Settings.GameSettingsFiles;
 
-namespace TurtleChallenge
+namespace TurtleChallenge.Boards
 {
-    internal class VisualBoard : Board, IBoard
+    public class VisualBoard : Board, IBoard
     {
         private int _cellSize = 16;
         private int _padding = 2;
